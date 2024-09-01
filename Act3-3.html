@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Calculator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            border: 1px solid black;
+            width: 800px;
+            padding-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="button"] {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .flex input {
+            margin-bottom: 5px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>List of Students</h2>
+        <div class="flex">
+            <p>Student No.: <input type="text" id="studentNo"></p>
+            <input type="button" value="Load" onclick="loadStudent()">
+        </div>
+
+        <p>Student Name: <span id="studentName" class="output"></span></p>
+        <p>Course: <span id="course" class="output"></span></p>
+
+        <h2>Grade Per Term</h2>
+        <p>Prelim: <input type="text" id="prelim"></p>
+        <p>Midterm: <input type="text" id="midterm"></p>
+        <p>Finals: <input type="text" id="finals"></p>
+        <input type="button" value="Compute" onclick="computeGrade()">
+    </div>
+    <h2>Screen 2</h2>
+    <div id="screen2"></div>
+
+
+    <script>
+        function loadStudent() {
+            var studentNo = document.getElementById('studentNo').value;
+            switch (studentNo) {
+                case 'C1':
+                    document.getElementById('studentName').innerHTML = 'Rafael Nadal';
+                    document.getElementById('course').innerHTML = 'HRM';
+                    break;
+                case 'C2':
+                    document.getElementById('studentName').innerHTML = 'Donald Trump';
+                    document.getElementById('course').innerHTML = 'IT';
+                    break;
+                case 'C3':
+                    document.getElementById('studentName').innerHTML = 'Joe Biden';
+                    document.getElementById('course').innerHTML = 'CS';
+                    break;
+                default:
+                    alert('Invalid student number');
+            }
+        }
+
+        function computeGrade() {
+            var prelim = parseFloat(document.getElementById('prelim').value);
+            var midterm = parseFloat(document.getElementById('midterm').value);
+            var finals = parseFloat(document.getElementById('finals').value);
+
+            var overallGrade = (prelim * 0.2) + (midterm * 0.3) + (finals * 0.5);
+            var remark = '';
+            if (overallGrade >= 75) {
+                remark = 'Passed';
+            } else if (overallGrade >= 41 && overallGrade <= 74) {
+                remark = 'Failed';
+            } else {
+                remark = 'Dropped';
+            }
+
+            document.getElementById('screen2').innerHTML = `
+      <h3>Computations:</h3>
+      <p>Report Card of ${document.getElementById('studentName').innerText}</p>
+      <p>Overall Grade: ${overallGrade.toFixed(2)}</p>
+      <p>Remark: ${remark}</p>
+    `;
+        }
+    </script>
+
+</body>
+
+</html>
